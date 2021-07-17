@@ -1,4 +1,4 @@
-# service-app
+# Timetable app
 
 ## Build Setup
 
