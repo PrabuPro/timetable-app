@@ -3,28 +3,30 @@
     "name": "inspire",
     "path": "/inspire",
     "component": "D:\\\\Timetable\\\\timetable-app\\\\pages\\\\inspire.vue",
-    "chunkName": "pages/inspire",
-    "_name": "_81c82924"
+    "chunkName": "pages/inspire"
   },
   {
     "name": "login",
     "path": "/login",
     "component": "D:\\\\Timetable\\\\timetable-app\\\\pages\\\\login.vue",
-    "chunkName": "pages/login",
-    "_name": "_19a3177d"
+    "chunkName": "pages/login"
   },
   {
     "name": "student",
     "path": "/student",
     "component": "D:\\\\Timetable\\\\timetable-app\\\\pages\\\\student.vue",
-    "chunkName": "pages/student",
-    "_name": "_8bb53b62"
+    "chunkName": "pages/student"
+  },
+  {
+    "name": "timetable",
+    "path": "/timetable",
+    "component": "D:\\\\Timetable\\\\timetable-app\\\\pages\\\\timetable.vue",
+    "chunkName": "pages/timetable"
   },
   {
     "name": "index",
     "path": "/",
     "component": "D:\\\\Timetable\\\\timetable-app\\\\pages\\\\index.vue",
-    "chunkName": "pages/index",
-    "_name": "_4ffb7466"
+    "chunkName": "pages/index"
   }
 ]

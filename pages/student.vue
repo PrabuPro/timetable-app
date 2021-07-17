@@ -261,6 +261,6 @@ export default {
 
 <style lang="scss" scoped>
 .category-table-section {
-  width: 80%;
+  width: 100%;
 }
 </style>
