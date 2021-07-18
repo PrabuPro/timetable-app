@@ -182,6 +182,11 @@ export default {
           title: 'Timetable',
           to: '/timetable',
         },
+        {
+          icon: 'mdi-account-circle',
+          title: 'Users',
+          to: '/user',
+        },
       ],
       miniVariant: false,
       right: true,

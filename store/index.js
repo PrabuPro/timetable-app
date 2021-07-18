@@ -8,7 +8,8 @@ export const state = () => {
     students: [],
     teachers: [],
     courses: [],
-    places: []
+    places: [],
+    users: []
   }
 }
 export const mutations = {
@@ -79,7 +80,7 @@ export const mutations = {
   },
 
 
-  //Cource Mutations
+  //Places Mutations
   resetPlaces(state, placeList){
     state.places = placeList;
   },
@@ -96,6 +97,25 @@ export const mutations = {
   deletePlace(state, placeId){
     let editIndex = state.places.findIndex(item => item.id == placeId)
     state.places.splice(editIndex, 1)
+  },
+
+  //Users Mutations
+  resetUsers(state, userList){
+    state.users = userList;
+  },
+  setUsers(state, userList) {
+    state.users.push(userList);
+  },
+  addNewUser(state, newUser){
+    state.users.push(newUser)
+  },
+  updateUser(state, editUser){
+    let editIndex = state.users.findIndex(item => item.id == editUser.id)
+    Object.assign(state.users[editIndex], editUser)
+  },
+  deleteUser(state, userId){
+    let editIndex = state.users.findIndex(item => item.id == userId)
+    state.users.splice(editIndex, 1)
   },
 
 }

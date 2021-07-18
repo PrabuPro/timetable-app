@@ -10,6 +10,7 @@ const _2a1ffbca = () => interopDefault(import('..\\pages\\place.vue' /* webpackC
 const _8bb53b62 = () => interopDefault(import('..\\pages\\student.vue' /* webpackChunkName: "pages/student" */))
 const _de84ff14 = () => interopDefault(import('..\\pages\\teacher.vue' /* webpackChunkName: "pages/teacher" */))
 const _710a6196 = () => interopDefault(import('..\\pages\\timetable.vue' /* webpackChunkName: "pages/timetable" */))
+const _700e3f67 = () => interopDefault(import('..\\pages\\user.vue' /* webpackChunkName: "pages/user" */))
 const _4ffb7466 = () => interopDefault(import('..\\pages\\index.vue' /* webpackChunkName: "pages/index" */))
 
 // TODO: remove in Nuxt 3
@@ -56,6 +57,10 @@ export const routerOptions = {
     path: "/timetable",
     component: _710a6196,
     name: "timetable"
+  }, {
+    path: "/user",
+    component: _700e3f67,
+    name: "user"
   }, {
     path: "/",
     component: _4ffb7466,

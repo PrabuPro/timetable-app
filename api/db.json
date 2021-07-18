@@ -1,15 +1,20 @@
 {
-  "user": {
-    "email": "email@email.com",
-    "password": "1234"
-  },
-  "Users": {
-    "firstName": "Test",
-    "lastName": "aaaa",
-    "email": "test@gmail.com",
-    "password": "test@123",
-    "new": "new"
-  },
+  "Users": [
+    {
+      "firstName": "wee",
+      "lastName": "w",
+      "email": "email@email.com",
+      "password": "password",
+      "id": 1
+    },
+    {
+      "firstName": "Prabuddha Mihira",
+      "lastName": "Perera",
+      "email": "we@erc.com",
+      "password": "1234",
+      "id": 2
+    }
+  ],
   "Students": [
     {
       "id": "",

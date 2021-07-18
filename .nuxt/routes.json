@@ -49,6 +49,13 @@
     "_name": "_710a6196"
   },
   {
+    "name": "user",
+    "path": "/user",
+    "component": "D:\\\\Timetable\\\\timetable-app\\\\pages\\\\user.vue",
+    "chunkName": "pages/user",
+    "_name": "_700e3f67"
+  },
+  {
     "name": "index",
     "path": "/",
     "component": "D:\\\\Timetable\\\\timetable-app\\\\pages\\\\index.vue",
