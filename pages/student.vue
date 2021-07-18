@@ -29,7 +29,7 @@
             </template>
             <v-card>
               <v-card-title>
-                <span class="headline">Technician Registry</span>
+                <span class="headline">Student Registry</span>
               </v-card-title>
 
               <form>
@@ -125,7 +125,7 @@ import { required } from 'vuelidate/lib/validators'
 export default {
   middleware: 'authenticated',
   async created() {
-    await this.$store.dispatch('getStudents');
+    await this.$store.dispatch('getItems', this.getMainObject());
     this.loading = false;
   },
   computed: {
@@ -211,7 +211,7 @@ export default {
     },
 
     deleteItemConfirm() {
-      this.$store.dispatch('deleteStudent', this.editedItem.id)
+      this.$store.dispatch('deleteItem', this.getMainObject())
       this.closeDelete()
     },
 
@@ -231,25 +231,36 @@ export default {
       })
     },
 
-    getStudentObject() {
+    getMainObject() {
       return {
-        editStudent: {
+        object: {
           name : this.editedItem.name,
           surName: this.editedItem.surName,
           dateOfBirth: this.editedItem.dateOfBirth,
           email: this.editedItem.email
         },
-        studentId: this.editedItem.id,
+        id: this.editedItem.id,
         editIndex: this.editedIndex,
+        urlPath: "/api/Students/",
+        resetItem: "resetStudents", 
+        setItem: "setStudents",
+        addNewItem: "addNewStudent",
+        updateItem: "updateStudent",
+        deleteItem: "deleteStudent",
+        messeges: {
+          addItem: "student Added",
+          updateItem: "student Updated",
+          deleteItem: "student Deleted"
+        }
       }
     },
     save() {
       this.$v.$touch()
       if (!this.$v.$invalid) {
         if (this.editedIndex > -1) {
-          this.$store.dispatch('updateStudent', this.getStudentObject())
+          this.$store.dispatch('updateItem', this.getMainObject())
         } else {
-          this.$store.dispatch('saveStudent', this.editedItem)
+          this.$store.dispatch('saveItem', this.getMainObject())
         }
         this.addMood = false
         this.close()

@@ -1,7 +1,6 @@
 const Cookie = process.client ? require('js-cookie') : undefined
 const cookieparser = process.server ? require('cookieparser') : undefined;
 
-const studentUrlPath = "/api/Students/";
 
 export const state = () => {
   return {
@@ -66,53 +65,54 @@ export const actions = {
     this.$toast.error(error).goAway(1500);
   },
 
-  //Students Actions
-  async getStudents({state,commit}){
-        await this.$axios.$get(studentUrlPath)
+  //Actions
+  async getItems({state,commit}, data){
+        console.log(data.urlPath, data.resetItem, data.setItem);
+        await this.$axios.$get(data.urlPath)
           .then(res => {
-              console.log("students", res);
-              const studentRes = res != null ? res : [];
-              if(studentRes.length > 0){
-                commit('resetStudents', []);
-                studentRes.forEach(item => {
-                  commit('setStudents', item);
+              const itemRes = res != null ? res : [];
+              if(itemRes.length > 0){
+                commit(data.resetItem, []);
+                itemRes.forEach(item => {
+                  commit(data.setItem, item);
                 })
               }
           })
     },
 
-  async saveStudent({commit}, newStudent){
-  await this.$axios.$post(studentUrlPath, {
-          ...newStudent
-        })
-        .then(res => {
-            const studentRes = res != null ? res : [];
-            if(studentRes != null){
-              commit('addNewStudent', studentRes);
-              this.$toast.success('student Added').goAway(1500); 
-            }
-        })
-  },
-  async updateStudent({commit}, editStudent,){
-    const editStudentObject = editStudent.editStudent;
-    await this.$axios.$put(studentUrlPath + editStudent.studentId, {
-            ...editStudentObject
+  async saveItem({commit}, data){
+    const itemObject = data.object;
+    await this.$axios.$post(data.urlPath, {
+            ...itemObject
           })
           .then(res => {
-              const studentRes = res != null ? res : [];
-              if(studentRes != null){
-                commit('updateStudent', studentRes);
-                this.$toast.success('Student Updated').goAway(1500);
+              const itemRes = res != null ? res : [];
+              if(itemRes != null){
+                commit(data.addNewItem, itemRes);
+                this.$toast.success(data.messeges.addItem).goAway(1500); 
               }
           })
   },
-  async deleteStudent({commit}, studentId){
-    await this.$axios.$delete(studentUrlPath + studentId, {})
+  async updateItem({commit}, data){
+    const itemObject = data.object;
+    await this.$axios.$put(data.urlPath + data.id, {
+            ...itemObject
+          })
           .then(res => {
-              const studentRes = res != null ? res : [];
-              if(studentRes != null){
-                commit('deleteStudent', studentId);
-                this.$toast.success('student Deleted').goAway(1500);
+              const itemRes = res != null ? res : [];
+              if(itemRes != null){
+                commit(data.updateItem, itemRes);
+                this.$toast.success(data.messeges.updateItem).goAway(1500);
+              }
+          })
+  },
+  async deleteItem({commit}, data){
+    await this.$axios.$delete(data.urlPath + data.id, {})
+          .then(res => {
+              const itemRes = res != null ? res : [];
+              if(itemRes != null){
+                commit(data.deleteItem, data.id);
+                this.$toast.success(data.messeges.deleteItem).goAway(1500);
               }
           })
   },
