@@ -21,6 +21,13 @@
     "_name": "_19a3177d"
   },
   {
+    "name": "place",
+    "path": "/place",
+    "component": "D:\\\\Timetable\\\\timetable-app\\\\pages\\\\place.vue",
+    "chunkName": "pages/place",
+    "_name": "_2a1ffbca"
+  },
+  {
     "name": "student",
     "path": "/student",
     "component": "D:\\\\Timetable\\\\timetable-app\\\\pages\\\\student.vue",

@@ -78,5 +78,13 @@
       },
       "id": 5
     }
+  ],
+  "Places": [
+    {
+      "name": "place1",
+      "isAC": true,
+      "capacity": "100",
+      "id": 1
+    }
   ]
 }
