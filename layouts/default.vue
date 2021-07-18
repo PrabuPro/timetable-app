@@ -158,19 +158,19 @@ export default {
       fixed: true,
       items: [
         {
+          icon: 'mdi-account',
+          title: 'Teachers',
+          to: '/teacher',
+        },
+        {
           icon: 'mdi-book',
-          title: 'Cources',
-          to: '/cource',
+          title: 'Courses',
+          to: '/course',
         },
         {
           icon: 'mdi-face',
           title: 'Students',
           to: '/student',
-        },
-        {
-          icon: 'mdi-account',
-          title: 'Teachers',
-          to: '/teacher',
         },
         {
           icon: 'mdi-home-city',

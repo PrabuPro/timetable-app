@@ -7,6 +7,7 @@ export const state = () => {
     auth: null,
     students: [],
     teachers: [],
+    courses: []
   }
 }
 export const mutations = {
@@ -46,18 +47,34 @@ export const mutations = {
     state.teachers.push(teacherList);
   },
   addNewTeacher(state, newTeacher){
-    console.log("newteacher",newTeacher);
     state.teachers.push(newTeacher)
   },
   updateTeacher(state, editTeacher){
-    console.log("updateteacher", editTeacher.id);
     let editIndex = state.teachers.findIndex(item => item.id == editTeacher.id)
-    console.log("editIndex", editIndex);
     Object.assign(state.teachers[editIndex], editTeacher)
   },
   deleteTeacher(state, teacherId){
     let editIndex = state.teachers.findIndex(item => item.id == teacherId)
     state.teachers.splice(editIndex, 1)
+  },
+
+  //Cource Mutations
+  resetCourses(state, courseList){
+    state.courses = courseList;
+  },
+  setCourses(state, courseList) {
+    state.courses.push(courseList);
+  },
+  addNewCourse(state, newCourse){
+    state.courses.push(newCourse)
+  },
+  updateCourse(state, editCourse){
+    let editIndex = state.courses.findIndex(item => item.id == editCourse.id)
+    Object.assign(state.courses[editIndex], editCourse)
+  },
+  deleteCourse(state, courseId){
+    let editIndex = state.courses.findIndex(item => item.id == courseId)
+    state.courses.splice(editIndex, 1)
   },
 
 }

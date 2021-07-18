@@ -1,5 +1,12 @@
 [
   {
+    "name": "course",
+    "path": "/course",
+    "component": "D:\\\\Timetable\\\\timetable-app\\\\pages\\\\course.vue",
+    "chunkName": "pages/course",
+    "_name": "_1a01fab7"
+  },
+  {
     "name": "inspire",
     "path": "/inspire",
     "component": "D:\\\\Timetable\\\\timetable-app\\\\pages\\\\inspire.vue",

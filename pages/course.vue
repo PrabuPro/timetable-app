@@ -2,7 +2,7 @@
   <div class="category-table-section" style="width: 80%">
     <v-data-table
       :headers="headers"
-      :items="teachers"
+      :items="courses"
       :items-per-page="10"
       class="elevation-1 mt-5"
       :loading="loading"
@@ -10,7 +10,7 @@
     >
       <template v-slot:top>
         <v-toolbar flat>
-          <v-toolbar-title>Teachers</v-toolbar-title>
+          <v-toolbar-title>courses</v-toolbar-title>
           <v-divider class="mx-4" inset vertical></v-divider>
           <v-spacer></v-spacer>
          
@@ -24,12 +24,12 @@
                 v-on="on"
                 @click="newJob()"
               >
-                New Teacher
+                New Cource
               </v-btn>
             </template>
             <v-card>
               <v-card-title>
-                <span class="headline">Teacher Registry</span>
+                <span class="headline">Cource Registry</span>
               </v-card-title>
 
               <form>
@@ -38,34 +38,43 @@
                     <v-row>
                       <v-col cols="12" sm="12" md="12">
                         <v-text-field
-                          label="Teacher Name"
-                          v-model="$v.editedItem.name.$model"
-                          :error-messages="teacherNameValidation"
+                          label="Cource title"
+                          v-model="$v.editedItem.title.$model"
+                          :error-messages="courceTitleValidation"
                           required
-                          @input="$v.editedItem.name.$touch()"
-                          @blur="$v.editedItem.name.$touch()"
+                          @input="$v.editedItem.title.$touch()"
+                          @blur="$v.editedItem.title.$touch()"
                         ></v-text-field>
                       </v-col>
                       <v-col cols="12" sm="12" md="12">
                         <v-text-field
-                          label="Teacher Address"
-                          v-model="$v.editedItem.address.$model"
-                          :error-messages="teacherAddressValidation"
+                          label="Teacher creditPoints"
+                          v-model="$v.editedItem.creditPoints.$model"
+                          :error-messages="courceCreditPointsValidation"
                           required
-                          @input="$v.editedItem.address.$touch()"
-                          @blur="$v.editedItem.address.$touch()"
+                          @input="$v.editedItem.creditPoints.$touch()"
+                          @blur="$v.editedItem.creditPoints.$touch()"
                         ></v-text-field>
                       </v-col>
-                      <v-col cols="12" sm="12" md="12">
-                        <v-text-field
-                          label="Years of Experience"
-                          v-model="$v.editedItem.yearsOfExperience.$model"
-                          :error-messages="teacherYearsOfExperience"
-                          required
-                          @input="$v.editedItem.yearsOfExperience.$touch()"
-                          @blur="$v.editedItem.yearsOfExperience.$touch()"
-                        ></v-text-field>
-                      </v-col>
+                      <v-col
+                        cols="12"
+                        sm="6"
+                        md="6"
+                        >
+                    
+                        <v-select
+                        :items="teachers"
+                        label="Teacher"
+                        v-model="$v.editedItem.teacher.$model"
+                        :error-messages="courceTeacherValidation"
+                        required
+                        @input="$v.editedItem.teacher.$touch()"
+                        @blur="$v.editedItem.teacher.$touch()"
+                        item-text="name"
+                        item-value="id"
+                      
+                        ></v-select>
+                    </v-col>
                     </v-row>
                   </v-container>
                 </v-card-text>
@@ -114,29 +123,30 @@ import { required } from 'vuelidate/lib/validators'
 export default {
   middleware: 'authenticated',
   async created() {
+      await this.$store.dispatch('getItems', this.getTeacherObject());
     await this.$store.dispatch('getItems', this.getMainObject());
     this.loading = false;
   },
   computed: {
-    ...mapState(['teachers' ]),
+    ...mapState([ 'courses','teachers' ]),
 
-    teacherNameValidation() {
+    courceTitleValidation() {
       const errors = []
-      if (!this.$v.editedItem.name.$dirty) return errors
-      !this.$v.editedItem.name.required &&
-        errors.push('Teacher name is required.')
+      if (!this.$v.editedItem.title.$dirty) return errors
+      !this.$v.editedItem.title.required &&
+        errors.push('Cource title is required.')
       return errors
     },
-    teacherAddressValidation() {
+    courceCreditPointsValidation() {
       const errors = []
-      if (!this.$v.editedItem.address.$dirty) return errors
-      !this.$v.editedItem.address.required && errors.push('Teacher address is required.')
+      if (!this.$v.editedItem.creditPoints.$dirty) return errors
+      !this.$v.editedItem.creditPoints.required && errors.push('Cource creditPoints is required.')
       return errors
     },
-    teacherYearsOfExperience() {
+    courceTeacherValidation() {
       const errors = []
-      if (!this.$v.editedItem.yearsOfExperience.$dirty) return errors
-      !this.$v.editedItem.yearsOfExperience.required && errors.push('Years of experience is required.')
+      if (!this.$v.editedItem.teacher.$dirty) return errors
+      !this.$v.editedItem.teacher.required && errors.push('Years of experience is required.')
       return errors
     }
   },
@@ -146,31 +156,30 @@ export default {
       dialog: false,
       dialogDelete: false,
       headers: [
-        { text: 'Name', align: 'center', value: 'name' },
-        { text: 'Address', align: 'center', value: 'address' },
-        { text: 'Years of experience', align: 'center', value: 'yearsOfExperience' },
+        { text: 'Title', align: 'center', value: 'title' },
+        { text: 'Credit Points', align: 'center', value: 'creditPoints' },
         { text: 'Actions', value: 'actions', align: 'center', sortable: false },
       ],
       editedIndex: -1,
       editedItem: {
         id: '',
-        name: '',
-        address: '',
-        yearsOfExperience: '',
+        title: '',
+        creditPoints: '',
+        teacher: '',
       },
       defaultItem: {
         id: '',
-        name: '',
-        address: '',
-        yearsOfExperience: '',
+        title: '',
+        creditPoints: '',
+        teacher: '',
       },
     }
   },
   validations: {
     editedItem: {
-      name: { required },
-      address: { required },
-      yearsOfExperience: { required },
+      title: { required },
+      creditPoints: { required },
+      teacher: { required },
     },
   },
  
@@ -178,13 +187,13 @@ export default {
     newJob() {},
     editItem(item) {
       console.log('edit item', item)
-      this.editedIndex = this.teachers.indexOf(item)
+      this.editedIndex = this.courses.indexOf(item)
       this.editedItem = Object.assign({}, item)
       this.dialog = true
     },
 
     deleteItem(item) {
-      this.editedIndex = this.teachers.indexOf(item)
+      this.editedIndex = this.courses.indexOf(item)
       this.editedItem = Object.assign({}, item)
       this.dialogDelete = true
     },
@@ -213,27 +222,35 @@ export default {
     getMainObject() {
       return {
         object: {
-          name : this.editedItem.name,
-          address: this.editedItem.address,
-          yearsOfExperience: this.editedItem.yearsOfExperience,
+          title : this.editedItem.title,
+          creditPoints: this.editedItem.creditPoints,
+          teacher: {
+            TeacherId: this.editedItem.teacher
+          },
         },
         id: this.editedItem.id,
         editIndex: this.editedIndex,
-        urlPath: "/api/Teachers/",
-        resetItem: "resetTeachers", 
-        setItem: "setTeachers",
-        addNewItem: "addNewTeacher",
-        updateItem: "updateTeacher",
-        deleteItem: "deleteTeacher",
+        urlPath: "/api/Courses/",
+        resetItem: "resetCourses", 
+        setItem: "setCourses",
+        addNewItem: "addNewCourse",
+        updateItem: "updateCourse",
+        deleteItem: "deleteCourse",
         messeges: {
-          addItem: "teacher Added",
-          updateItem: "teacher Updated",
-          deleteItem: "teacher Deleted"
+          addItem: "course Added",
+          updateItem: "course Updated",
+          deleteItem: "course Deleted"
         }
       }
     },
+    getTeacherObject() {
+      return {
+        urlPath: "/api/Teachers/",
+        resetItem: "resetTeachers", 
+        setItem: "setTeachers",
+      }
+    },
     save() {
-      console.log("save");
       this.$v.$touch()
       if (!this.$v.$invalid) {
         if (this.editedIndex > -1) {

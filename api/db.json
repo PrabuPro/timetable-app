@@ -37,6 +37,46 @@
       "address": "te",
       "yearsOfExperience": "t",
       "id": 1
+    },
+    {
+      "name": "teacher 2",
+      "address": "addres",
+      "yearsOfExperience": "1",
+      "id": 2
+    }
+  ],
+  "Courses": [
+    {
+      "title": "title",
+      "creditPoints": "10",
+      "teacher": {},
+      "id": 1
+    },
+    {
+      "title": "ww",
+      "creditPoints": "ww",
+      "teacher": {},
+      "id": 2
+    },
+    {
+      "title": "t",
+      "creditPoints": "t",
+      "teacher": {},
+      "id": 3
+    },
+    {
+      "title": "t",
+      "creditPoints": "t",
+      "teacher": {},
+      "id": 4
+    },
+    {
+      "title": "t",
+      "creditPoints": "t",
+      "teacher": {
+        "TeacherId": 2
+      },
+      "id": 5
     }
   ]
 }
