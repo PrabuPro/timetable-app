@@ -6,6 +6,7 @@ export const state = () => {
   return {
     auth: null,
     students: [],
+    teachers: [],
   }
 }
 export const mutations = {
@@ -35,6 +36,28 @@ export const mutations = {
   deleteStudent(state, studentId){
     let editIndex = state.students.findIndex(item => item.id == studentId)
     state.students.splice(editIndex, 1)
+  },
+
+  //Teacher Mutations
+  resetTeachers(state, teacherList){
+    state.teachers = teacherList;
+  },
+  setTeachers(state, teacherList) {
+    state.teachers.push(teacherList);
+  },
+  addNewTeacher(state, newTeacher){
+    console.log("newteacher",newTeacher);
+    state.teachers.push(newTeacher)
+  },
+  updateTeacher(state, editTeacher){
+    console.log("updateteacher", editTeacher.id);
+    let editIndex = state.teachers.findIndex(item => item.id == editTeacher.id)
+    console.log("editIndex", editIndex);
+    Object.assign(state.teachers[editIndex], editTeacher)
+  },
+  deleteTeacher(state, teacherId){
+    let editIndex = state.teachers.findIndex(item => item.id == teacherId)
+    state.teachers.splice(editIndex, 1)
   },
 
 }
@@ -81,6 +104,7 @@ export const actions = {
     },
 
   async saveItem({commit}, data){
+    console.log("saveItem");
     const itemObject = data.object;
     await this.$axios.$post(data.urlPath, {
             ...itemObject
