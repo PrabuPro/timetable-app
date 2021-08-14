@@ -2,64 +2,55 @@
   {
     "name": "course",
     "path": "/course",
-    "component": "D:\\\\Timetable\\\\timetable-app\\\\pages\\\\course.vue",
-    "chunkName": "pages/course",
-    "_name": "_1a01fab7"
+    "component": "E:\\\\Projects\\\\time-table\\\\timetable-app\\\\pages\\\\course.vue",
+    "chunkName": "pages/course"
   },
   {
     "name": "inspire",
     "path": "/inspire",
-    "component": "D:\\\\Timetable\\\\timetable-app\\\\pages\\\\inspire.vue",
-    "chunkName": "pages/inspire",
-    "_name": "_81c82924"
+    "component": "E:\\\\Projects\\\\time-table\\\\timetable-app\\\\pages\\\\inspire.vue",
+    "chunkName": "pages/inspire"
   },
   {
     "name": "login",
     "path": "/login",
-    "component": "D:\\\\Timetable\\\\timetable-app\\\\pages\\\\login.vue",
-    "chunkName": "pages/login",
-    "_name": "_19a3177d"
+    "component": "E:\\\\Projects\\\\time-table\\\\timetable-app\\\\pages\\\\login.vue",
+    "chunkName": "pages/login"
   },
   {
     "name": "place",
     "path": "/place",
-    "component": "D:\\\\Timetable\\\\timetable-app\\\\pages\\\\place.vue",
-    "chunkName": "pages/place",
-    "_name": "_2a1ffbca"
+    "component": "E:\\\\Projects\\\\time-table\\\\timetable-app\\\\pages\\\\place.vue",
+    "chunkName": "pages/place"
   },
   {
     "name": "student",
     "path": "/student",
-    "component": "D:\\\\Timetable\\\\timetable-app\\\\pages\\\\student.vue",
-    "chunkName": "pages/student",
-    "_name": "_8bb53b62"
+    "component": "E:\\\\Projects\\\\time-table\\\\timetable-app\\\\pages\\\\student.vue",
+    "chunkName": "pages/student"
   },
   {
     "name": "teacher",
     "path": "/teacher",
-    "component": "D:\\\\Timetable\\\\timetable-app\\\\pages\\\\teacher.vue",
-    "chunkName": "pages/teacher",
-    "_name": "_de84ff14"
+    "component": "E:\\\\Projects\\\\time-table\\\\timetable-app\\\\pages\\\\teacher.vue",
+    "chunkName": "pages/teacher"
   },
   {
     "name": "timetable",
     "path": "/timetable",
-    "component": "D:\\\\Timetable\\\\timetable-app\\\\pages\\\\timetable.vue",
-    "chunkName": "pages/timetable",
-    "_name": "_710a6196"
+    "component": "E:\\\\Projects\\\\time-table\\\\timetable-app\\\\pages\\\\timetable.vue",
+    "chunkName": "pages/timetable"
   },
   {
     "name": "user",
     "path": "/user",
-    "component": "D:\\\\Timetable\\\\timetable-app\\\\pages\\\\user.vue",
-    "chunkName": "pages/user",
-    "_name": "_700e3f67"
+    "component": "E:\\\\Projects\\\\time-table\\\\timetable-app\\\\pages\\\\user.vue",
+    "chunkName": "pages/user"
   },
   {
     "name": "index",
     "path": "/",
-    "component": "D:\\\\Timetable\\\\timetable-app\\\\pages\\\\index.vue",
-    "chunkName": "pages/index",
-    "_name": "_4ffb7466"
+    "component": "E:\\\\Projects\\\\time-table\\\\timetable-app\\\\pages\\\\index.vue",
+    "chunkName": "pages/index"
   }
 ]

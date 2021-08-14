@@ -3,15 +3,15 @@ import Router from 'vue-router'
 import { interopDefault } from './utils'
 import scrollBehavior from './router.scrollBehavior.js'
 
-const _1a01fab7 = () => interopDefault(import('..\\pages\\course.vue' /* webpackChunkName: "pages/course" */))
-const _81c82924 = () => interopDefault(import('..\\pages\\inspire.vue' /* webpackChunkName: "pages/inspire" */))
-const _19a3177d = () => interopDefault(import('..\\pages\\login.vue' /* webpackChunkName: "pages/login" */))
-const _2a1ffbca = () => interopDefault(import('..\\pages\\place.vue' /* webpackChunkName: "pages/place" */))
-const _8bb53b62 = () => interopDefault(import('..\\pages\\student.vue' /* webpackChunkName: "pages/student" */))
-const _de84ff14 = () => interopDefault(import('..\\pages\\teacher.vue' /* webpackChunkName: "pages/teacher" */))
-const _710a6196 = () => interopDefault(import('..\\pages\\timetable.vue' /* webpackChunkName: "pages/timetable" */))
-const _700e3f67 = () => interopDefault(import('..\\pages\\user.vue' /* webpackChunkName: "pages/user" */))
-const _4ffb7466 = () => interopDefault(import('..\\pages\\index.vue' /* webpackChunkName: "pages/index" */))
+const _2f2a7e55 = () => interopDefault(import('..\\pages\\course.vue' /* webpackChunkName: "pages/course" */))
+const _4f03db90 = () => interopDefault(import('..\\pages\\inspire.vue' /* webpackChunkName: "pages/inspire" */))
+const _f4a6afc2 = () => interopDefault(import('..\\pages\\login.vue' /* webpackChunkName: "pages/login" */))
+const _56f992bd = () => interopDefault(import('..\\pages\\place.vue' /* webpackChunkName: "pages/place" */))
+const _4a0d5271 = () => interopDefault(import('..\\pages\\student.vue' /* webpackChunkName: "pages/student" */))
+const _20a57098 = () => interopDefault(import('..\\pages\\teacher.vue' /* webpackChunkName: "pages/teacher" */))
+const _05b18252 = () => interopDefault(import('..\\pages\\timetable.vue' /* webpackChunkName: "pages/timetable" */))
+const _73c1daf6 = () => interopDefault(import('..\\pages\\user.vue' /* webpackChunkName: "pages/user" */))
+const _87f5f5f0 = () => interopDefault(import('..\\pages\\index.vue' /* webpackChunkName: "pages/index" */))
 
 // TODO: remove in Nuxt 3
 const emptyFn = () => {}
@@ -31,39 +31,39 @@ export const routerOptions = {
 
   routes: [{
     path: "/course",
-    component: _1a01fab7,
+    component: _2f2a7e55,
     name: "course"
   }, {
     path: "/inspire",
-    component: _81c82924,
+    component: _4f03db90,
     name: "inspire"
   }, {
     path: "/login",
-    component: _19a3177d,
+    component: _f4a6afc2,
     name: "login"
   }, {
     path: "/place",
-    component: _2a1ffbca,
+    component: _56f992bd,
     name: "place"
   }, {
     path: "/student",
-    component: _8bb53b62,
+    component: _4a0d5271,
     name: "student"
   }, {
     path: "/teacher",
-    component: _de84ff14,
+    component: _20a57098,
     name: "teacher"
   }, {
     path: "/timetable",
-    component: _710a6196,
+    component: _05b18252,
     name: "timetable"
   }, {
     path: "/user",
-    component: _700e3f67,
+    component: _73c1daf6,
     name: "user"
   }, {
     path: "/",
-    component: _4ffb7466,
+    component: _87f5f5f0,
     name: "index"
   }],
 
