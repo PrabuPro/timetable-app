@@ -2,7 +2,7 @@
   <div class="category-table-section" style="width: 80%">
     <v-data-table
       :headers="headers"
-      :items="students"
+      :items="studentCourses"
       :items-per-page="10"
       class="elevation-1 mt-5"
       :loading="loading"
@@ -10,7 +10,7 @@
     >
       <template v-slot:top>
         <v-toolbar flat>
-          <v-toolbar-title>Students</v-toolbar-title>
+          <v-toolbar-title>StudentCource</v-toolbar-title>
           <v-divider class="mx-4" inset vertical></v-divider>
           <v-spacer></v-spacer>
          
@@ -24,60 +24,57 @@
                 v-on="on"
                 @click="newJob()"
               >
-                New Student
+                new Studnet Course
               </v-btn>
             </template>
             <v-card>
               <v-card-title>
-                <span class="headline">Student Registry</span>
+                <span class="headline">Studnet Course</span>
               </v-card-title>
 
               <form>
                 <v-card-text>
                   <v-container>
                     <v-row>
-                      <v-col cols="12" sm="12" md="12">
-                        <v-text-field
-                          label="Student Name"
-                          v-model="$v.editedItem.Name.$model"
-                          :error-messages="studentNameValidation"
-                          required
-                          @input="$v.editedItem.Name.$touch()"
-                          @blur="$v.editedItem.Name.$touch()"
-                        ></v-text-field>
+                      <v-col
+                        cols="12"
+                        sm="6"
+                        md="6"
+                        >
+                    
+                        <v-select
+                        :items="students"
+                        label="Students"
+                        v-model="$v.editedItem.Student.$model"
+                        :error-messages="StudentValidation"
+                        required
+                        @input="$v.editedItem.Student.$touch()"
+                        @blur="$v.editedItem.Student.$touch()"
+                        item-text="Name"
+                        item-value="StudentId"
+                      
+                        ></v-select>
                       </v-col>
-                      <v-col cols="12" sm="12" md="12">
-                        <v-text-field
-                          label="Student Sur Name"
-                          v-model="$v.editedItem.SurName.$model"
-                          :error-messages="studentSurNameValidation"
-                          required
-                          @input="$v.editedItem.SurName.$touch()"
-                          @blur="$v.editedItem.SurName.$touch()"
-                        ></v-text-field>
-                      </v-col>
-                      <v-col cols="12" sm="12" md="12">
-                        <v-text-field
-                          label="DOB"
-                          placeholder="DD/MM/YYYY"
-                          v-model="$v.editedItem.DateOfBirth.$model"
-                          :error-messages="studentDateOfBirthValidation"
-                          required
-                          @input="$v.editedItem.DateOfBirth.$touch()"
-                          @blur="$v.editedItem.DateOfBirth.$touch()"
-                        ></v-text-field>
-                      </v-col>
-                      <v-col cols="12" sm="12" md="12">
-                        <v-text-field
-                          label="Email"
-                          v-model="$v.editedItem.Email.$model"
-                          :error-messages="studentemailValidation"
-                          required
-                          email
-                          @input="$v.editedItem.Email.$touch()"
-                          @blur="$v.editedItem.Email.$touch()"
-                        ></v-text-field>
-                      </v-col>
+   
+                    <v-col
+                        cols="12"
+                        sm="6"
+                        md="6"
+                        >
+                    
+                        <v-select
+                        :items="courses"
+                        label="Course"
+                        v-model="$v.editedItem.Course.$model"
+                        :error-messages="CourseValidation"
+                        required
+                        @input="$v.editedItem.Course.$touch()"
+                        @blur="$v.editedItem.Course.$touch()"
+                        item-text="Title"
+                        item-value="CourseId"
+                      
+                        ></v-select>
+                    </v-col>
                     </v-row>
                   </v-container>
                 </v-card-text>
@@ -126,37 +123,27 @@ import { required } from 'vuelidate/lib/validators'
 export default {
   middleware: 'authenticated',
   async created() {
+    await this.$store.dispatch('getItems', this.getStudentObject());
+    await this.$store.dispatch('getItems', this.getCourseObject());
     await this.$store.dispatch('getItems', this.getMainObject());
     this.loading = false;
   },
   computed: {
-    ...mapState(['students' ]),
+    ...mapState(['studentCourses', 'students', 'courses' ]),
 
-    studentNameValidation() {
+    StudentValidation() {
       const errors = []
-      if (!this.$v.editedItem.Name.$dirty) return errors
-      !this.$v.editedItem.Name.required &&
-        errors.push('Student name is required.')
+      if (!this.$v.editedItem.Student.$dirty) return errors
+      !this.$v.editedItem.Student.required &&
+        errors.push('Place Student is required.')
       return errors
     },
-    studentSurNameValidation() {
+    CourseValidation() {
       const errors = []
-      if (!this.$v.editedItem.SurName.$dirty) return errors
-      !this.$v.editedItem.SurName.required && errors.push('Student Sur name is required.')
+      if (!this.$v.editedItem.Course.$dirty) return errors
+      !this.$v.editedItem.Course.required && errors.push('Course is required.')
       return errors
-    },
-    studentDateOfBirthValidation() {
-      const errors = []
-      if (!this.$v.editedItem.DateOfBirth.$dirty) return errors
-      !this.$v.editedItem.DateOfBirth.required && errors.push('DOB is required.')
-      return errors
-    },
-    studentemailValidation() {
-      const errors = []
-      if (!this.$v.editedItem.Email.$dirty) return errors
-      !this.$v.editedItem.Email.required && errors.push('Email is required.')
-      return errors
-    },
+    }
   },
   data() {
     return {
@@ -164,35 +151,27 @@ export default {
       dialog: false,
       dialogDelete: false,
       headers: [
-        { text: 'Name', align: 'center', value: 'Name' },
-        { text: 'Sur Name', align: 'center', value: 'SurName' },
-        { text: 'DOB', align: 'center', value: 'DateOfBirth' },
-        { text: 'Email', align: 'center', value: 'Email' },
+        { text: 'Student', align: 'center', value: 'Student.Name' },
+        { text: 'Course', align: 'center', value: 'Course.Title' },
         { text: 'Actions', value: 'actions', align: 'center', sortable: false },
       ],
       editedIndex: -1,
       editedItem: {
-        StudentId: '',
-        Name: '',
-        SurName: '',
-        DateOfBirth: '',
-        Email: '',
+        StudentCourseId: '',
+        Student: '',
+        Course: '',
       },
       defaultItem: {
-        StudentId: '',
-        Name: '',
-        SurName: '',
-        DateOfBirth: '',
-        Email: '',
+        StudentCourseId: '',
+        Student: '',
+        Course: '',
       },
     }
   },
   validations: {
     editedItem: {
-      Name: { required },
-      SurName: { required },
-      DateOfBirth: { required },
-      Email: { required },
+      Student: { required },
+      Course: { required },
     },
   },
  
@@ -200,13 +179,13 @@ export default {
     newJob() {},
     editItem(item) {
       console.log('edit item', item)
-      this.editedIndex = this.students.indexOf(item)
+      this.editedIndex = this.studentCourses.indexOf(item)
       this.editedItem = Object.assign({}, item)
       this.dialog = true
     },
 
     deleteItem(item) {
-      this.editedIndex = this.students.indexOf(item)
+      this.editedIndex = this.studentCourses.indexOf(item)
       this.editedItem = Object.assign({}, item)
       this.dialogDelete = true
     },
@@ -235,27 +214,42 @@ export default {
     getMainObject() {
       return {
         object: {
-          Name : this.editedItem.Name,
-          SurName: this.editedItem.SurName,
-          DateOfBirth: this.editedItem.DateOfBirth,
-          Email: this.editedItem.Email
+          StudentId : this.editedItem.Student.StudentId == null ? this.editedItem.Student : this.editedItem.Student.StudentId,
+          Course: {
+            CourseId: this.editedItem.Course.CourseId == null ? this.editedItem.Course : this.editedItem.Course.CourseId
+          },
         },
-        id: this.editedItem.StudentId,
+        id: this.editedItem.StudentCourseId,
         editIndex: this.editedIndex,
-        urlPath: "/api/Students/",
-        resetItem: "resetStudents", 
-        setItem: "setStudents",
-        addNewItem: "addNewStudent",
-        updateItem: "updateStudent",
-        deleteItem: "deleteStudent",
+        urlPath: "/api/StudentCourses/",
+        resetItem: "resetStudentCourses", 
+        setItem: "setStudentCourses",
+        addNewItem: "addNewStudentCourse",
+        updateItem: "updateStudentCourse",
+        deleteItem: "deleteStudentCourse",
         messeges: {
-          addItem: "student Added",
-          updateItem: "student Updated",
-          deleteItem: "student Deleted"
+          addItem: "StudentCourse Added",
+          updateItem: "StudentCourse Updated",
+          deleteItem: "StudentCourse Deleted"
         }
       }
     },
+     getCourseObject() {
+      return {
+        urlPath: "/api/Courses/",
+        resetItem: "resetCourses", 
+        setItem: "setCourses",
+      }
+    },
+     getStudentObject() {
+      return {
+        urlPath: "/api/Students/",
+        resetItem: "resetStudents", 
+        setItem: "setStudents",
+      }
+    },
     save() {
+      console.log("save");
       this.$v.$touch()
       if (!this.$v.$invalid) {
         if (this.editedIndex > -1) {

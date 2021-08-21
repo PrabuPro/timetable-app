@@ -38,22 +38,22 @@
                     <v-row>
                       <v-col cols="12" sm="12" md="12">
                         <v-text-field
-                          label="Cource title"
-                          v-model="$v.editedItem.title.$model"
+                          label="Cource Title"
+                          v-model="$v.editedItem.Title.$model"
                           :error-messages="courceTitleValidation"
                           required
-                          @input="$v.editedItem.title.$touch()"
-                          @blur="$v.editedItem.title.$touch()"
+                          @input="$v.editedItem.Title.$touch()"
+                          @blur="$v.editedItem.Title.$touch()"
                         ></v-text-field>
                       </v-col>
                       <v-col cols="12" sm="12" md="12">
                         <v-text-field
-                          label="Teacher creditPoints"
-                          v-model="$v.editedItem.creditPoints.$model"
+                          label="Teacher CreditPoints"
+                          v-model="$v.editedItem.CreditPoints.$model"
                           :error-messages="courceCreditPointsValidation"
                           required
-                          @input="$v.editedItem.creditPoints.$touch()"
-                          @blur="$v.editedItem.creditPoints.$touch()"
+                          @input="$v.editedItem.CreditPoints.$touch()"
+                          @blur="$v.editedItem.CreditPoints.$touch()"
                         ></v-text-field>
                       </v-col>
                       <v-col
@@ -65,13 +65,13 @@
                         <v-select
                         :items="teachers"
                         label="Teacher"
-                        v-model="$v.editedItem.teacher.$model"
+                        v-model="$v.editedItem.Teacher.$model"
                         :error-messages="courceTeacherValidation"
                         required
-                        @input="$v.editedItem.teacher.$touch()"
-                        @blur="$v.editedItem.teacher.$touch()"
-                        item-text="name"
-                        item-value="id"
+                        @input="$v.editedItem.Teacher.$touch()"
+                        @blur="$v.editedItem.Teacher.$touch()"
+                        item-text="Name"
+                        item-value="TeacherId"
                       
                         ></v-select>
                     </v-col>
@@ -123,7 +123,7 @@ import { required } from 'vuelidate/lib/validators'
 export default {
   middleware: 'authenticated',
   async created() {
-      await this.$store.dispatch('getItems', this.getTeacherObject());
+    await this.$store.dispatch('getItems', this.getTeacherObject());
     await this.$store.dispatch('getItems', this.getMainObject());
     this.loading = false;
   },
@@ -132,21 +132,21 @@ export default {
 
     courceTitleValidation() {
       const errors = []
-      if (!this.$v.editedItem.title.$dirty) return errors
-      !this.$v.editedItem.title.required &&
-        errors.push('Cource title is required.')
+      if (!this.$v.editedItem.Title.$dirty) return errors
+      !this.$v.editedItem.Title.required &&
+        errors.push('Cource Title is required.')
       return errors
     },
     courceCreditPointsValidation() {
       const errors = []
-      if (!this.$v.editedItem.creditPoints.$dirty) return errors
-      !this.$v.editedItem.creditPoints.required && errors.push('Cource creditPoints is required.')
+      if (!this.$v.editedItem.CreditPoints.$dirty) return errors
+      !this.$v.editedItem.CreditPoints.required && errors.push('Cource CreditPoints is required.')
       return errors
     },
     courceTeacherValidation() {
       const errors = []
-      if (!this.$v.editedItem.teacher.$dirty) return errors
-      !this.$v.editedItem.teacher.required && errors.push('Years of experience is required.')
+      if (!this.$v.editedItem.Teacher.$dirty) return errors
+      !this.$v.editedItem.Teacher.required && errors.push('Years of experience is required.')
       return errors
     }
   },
@@ -156,30 +156,30 @@ export default {
       dialog: false,
       dialogDelete: false,
       headers: [
-        { text: 'Title', align: 'center', value: 'title' },
-        { text: 'Credit Points', align: 'center', value: 'creditPoints' },
+        { text: 'Title', align: 'center', value: 'Title' },
+        { text: 'Credit Points', align: 'center', value: 'CreditPoints' },
         { text: 'Actions', value: 'actions', align: 'center', sortable: false },
       ],
       editedIndex: -1,
       editedItem: {
-        id: '',
-        title: '',
-        creditPoints: '',
-        teacher: '',
+        CourseId: '',
+        Title: '',
+        CreditPoints: '',
+        Teacher: '',
       },
       defaultItem: {
-        id: '',
-        title: '',
-        creditPoints: '',
-        teacher: '',
+        CourseId: '',
+        Title: '',
+        CreditPoints: '',
+        Teacher: '',
       },
     }
   },
   validations: {
     editedItem: {
-      title: { required },
-      creditPoints: { required },
-      teacher: { required },
+      Title: { required },
+      CreditPoints: { required },
+      Teacher: { required },
     },
   },
  
@@ -222,13 +222,13 @@ export default {
     getMainObject() {
       return {
         object: {
-          title : this.editedItem.title,
-          creditPoints: this.editedItem.creditPoints,
-          teacher: {
-            TeacherId: this.editedItem.teacher
+          Title : this.editedItem.Title,
+          CreditPoints: this.editedItem.CreditPoints,
+          Teacher: {
+            TeacherId: this.editedItem.Teacher.TeacherId == null ? this.editedItem.Teacher : this.editedItem.Teacher.TeacherId 
           },
         },
-        id: this.editedItem.id,
+        id: this.editedItem.CourseId,
         editIndex: this.editedIndex,
         urlPath: "/api/Courses/",
         resetItem: "resetCourses", 

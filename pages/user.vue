@@ -39,43 +39,55 @@
                       <v-col cols="12" sm="12" md="12">
                         <v-text-field
                           label="First Name"
-                          v-model="$v.editedItem.firstName.$model"
-                          :error-messages="firstNameValidation"
+                          v-model="$v.editedItem.FirstName.$model"
+                          :error-messages="FirstNameValidation"
                           required
-                          @input="$v.editedItem.firstName.$touch()"
-                          @blur="$v.editedItem.firstName.$touch()"
+                          @input="$v.editedItem.FirstName.$touch()"
+                          @blur="$v.editedItem.FirstName.$touch()"
                         ></v-text-field>
                       </v-col>
                       <v-col cols="12" sm="12" md="12">
                         <v-text-field
                           label="Last Name"
-                          v-model="$v.editedItem.lastName.$model"
-                          :error-messages="lastNameValidation"
+                          v-model="$v.editedItem.LastName.$model"
+                          :error-messages="LastNameValidation"
                           required
-                          @input="$v.editedItem.lastName.$touch()"
-                          @blur="$v.editedItem.lastName.$touch()"
+                          @input="$v.editedItem.LastName.$touch()"
+                          @blur="$v.editedItem.LastName.$touch()"
                         ></v-text-field>
                       </v-col>
                       <v-col cols="12" sm="12" md="12">
                         <v-text-field
-                          label="email"
-                          v-model="$v.editedItem.email.$model"
-                          :error-messages="emailValidation"
+                          label="Email"
+                          v-model="$v.editedItem.Email.$model"
+                          :error-messages="EmailValidation"
                           required
-                          @input="$v.editedItem.email.$touch()"
-                          @blur="$v.editedItem.email.$touch()"
+                          @input="$v.editedItem.Email.$touch()"
+                          @blur="$v.editedItem.Email.$touch()"
                         ></v-text-field>
                       </v-col>
+                      <v-col
+                          cols="12"
+                          sm="6"
+                          md="6"
+                          >
+                             <v-select
+                              :items="userList"
+                              v-model="editedItem.UserType"
+                              label="User Type"
+                            ></v-select>
+                      </v-col>
+                      
                       <v-col cols="12" sm="12" md="12">
                         <v-text-field
-                          label="password"
-                          v-model="$v.editedItem.password.$model"
+                          label="Password"
+                          v-model="$v.editedItem.Password.$model"
                           :append-icon="show ? 'mdi-eye' : 'mdi-eye-off'"
-                          :type="show ? 'text' : 'password'"
-                          :error-messages="passwordValidation"
+                          :type="show ? 'text' : 'Password'"
+                          :error-messages="PasswordValidation"
                           required
-                          @input="$v.editedItem.password.$touch()"
-                          @blur="$v.editedItem.password.$touch()"
+                          @input="$v.editedItem.Password.$touch()"
+                          @blur="$v.editedItem.Password.$touch()"
                            @click:append="show = !show"
                         ></v-text-field>
                       </v-col>
@@ -134,30 +146,30 @@ export default {
   computed: {
     ...mapState(['users' ]),
 
-    firstNameValidation() {
+    FirstNameValidation() {
       const errors = []
-      if (!this.$v.editedItem.firstName.$dirty) return errors
-      !this.$v.editedItem.firstName.required &&
-        errors.push('firstName is required.')
+      if (!this.$v.editedItem.FirstName.$dirty) return errors
+      !this.$v.editedItem.FirstName.required &&
+        errors.push('FirstName is required.')
       return errors
     },
-    lastNameValidation() {
+    LastNameValidation() {
       const errors = []
-      if (!this.$v.editedItem.lastName.$dirty) return errors
-      !this.$v.editedItem.lastName.required &&
-        errors.push('lastName is required.')
+      if (!this.$v.editedItem.LastName.$dirty) return errors
+      !this.$v.editedItem.LastName.required &&
+        errors.push('LastName is required.')
       return errors
     },
-    emailValidation() {
+    EmailValidation() {
       const errors = []
-      if (!this.$v.editedItem.email.$dirty) return errors
-      !this.$v.editedItem.email.required && errors.push('email is required.')
+      if (!this.$v.editedItem.Email.$dirty) return errors
+      !this.$v.editedItem.Email.required && errors.push('Email is required.')
       return errors
     },
-    passwordValidation() {
+    PasswordValidation() {
       const errors = []
-      if (!this.$v.editedItem.password.$dirty) return errors
-      !this.$v.editedItem.password.required && errors.push('password is required.')
+      if (!this.$v.editedItem.Password.$dirty) return errors
+      !this.$v.editedItem.Password.required && errors.push('Password is required.')
       return errors
     }
   },
@@ -167,35 +179,39 @@ export default {
       loading:true,
       dialog: false,
       dialogDelete: false,
+      userList: ['Admin', 'User'],
       headers: [
-        { text: 'First Name', align: 'center', value: 'firstName' },
-        { text: 'Last Name', align: 'center', value: 'lastName' },
-        { text: 'email', align: 'center', value: 'email' },
+        { text: 'First Name', align: 'center', value: 'FirstName' },
+        { text: 'Last Name', align: 'center', value: 'LastName' },
+        { text: 'Email', align: 'center', value: 'Email' },
         { text: 'Actions', value: 'actions', align: 'center', sortable: false },
       ],
+      userType: "",
       editedIndex: -1,
       editedItem: {
-        id: '',
-        firstName: '',
-        lastName: '',
-        email: '',
-        password: ''
+        Id: '',
+        FirstName: '',
+        LastName: '',
+        Email: '',
+        Password: '',
+        UserType: ''
       },
       defaultItem: {
-        id: '',
-        firstName: '',
-        lastName: '',
-        email: '',
-        password: ''
+        Id: '',
+        FirstName: '',
+        LastName: '',
+        Email: '',
+        Password: '',
+        UserType: ''
       },
     }
   },
   validations: {
     editedItem: {
-      firstName: { required },
-      lastName: { required },
-      email: { required },
-      password: { required }
+      FirstName: { required },
+      LastName: { required },
+      Email: { required },
+      Password: { required }
     },
   },
  
@@ -238,14 +254,15 @@ export default {
     getMainObject() {
       return {
         object: {
-          firstName : this.editedItem.firstName,
-          lastName: this.editedItem.lastName,
-          email: this.editedItem.email,
-          password: this.editedItem.password
+          FirstName : this.editedItem.FirstName,
+          LastName: this.editedItem.LastName,
+          Email: this.editedItem.Email,
+          Password: this.editedItem.Password,
+          UserType: this.editedItem.UserType
         },
-        id: this.editedItem.id,
+        id: this.editedItem.Id,
         editIndex: this.editedIndex,
-        urlPath: "/api/Users/",
+        urlPath: "/api/User/",
         resetItem: "resetUsers", 
         setItem: "setUsers",
         addNewItem: "addNewUser",

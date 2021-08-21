@@ -9,7 +9,9 @@ export const state = () => {
     teachers: [],
     courses: [],
     places: [],
-    users: []
+    users: [],
+    studentCourses: [],
+
   }
 }
 export const mutations = {
@@ -118,6 +120,27 @@ export const mutations = {
     state.users.splice(editIndex, 1)
   },
 
+
+  //StudentCourse Mutations
+  resetStudentCourses(state, studentCoursesList){
+    state.studentCourses = studentCoursesList;
+  },
+  setStudentCourses(state, studentCoursesList) {
+    state.studentCourses.push(studentCoursesList);
+  },
+  addNewStudentCourse(state, newStudentCourse){
+    state.studentCourses.push(newStudentCourse)
+  },
+  updateStudentCourse(state, editStudentCourse){
+    let editIndex = state.studentCourses.findIndex(item => item.id == editStudentCourse.id)
+    Object.assign(state.studentCourses[editIndex], editStudentCourse)
+  },
+  deleteStudentCourse(state, studentCourseId){
+    let editIndex = state.studentCourses.findIndex(item => item.StudentCourseId == studentCourseId)
+    state.studentCourses.splice(editIndex, 1)
+  },
+
+
 }
 export const actions = {
   nuxtServerInit ({ commit }, { req }) {
@@ -198,6 +221,7 @@ export const actions = {
               }
           })
   },
+
 
 
 }

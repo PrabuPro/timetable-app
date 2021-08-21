@@ -50,69 +50,53 @@
       </v-list>
       
     </v-navigation-drawer> -->
-    <v-navigation-drawer
-      v-model="drawer"
-      :mini-variant="miniVariant"
-      :clipped="clipped"
-      fixed
-      app
-      >
+    <v-navigation-drawer v-model="drawer" :mini-variant="miniVariant" :clipped="clipped" fixed app>
       <!-- -->
-      
+
 
       <v-list nav dense>
         <v-list-item>
-        <v-list-item-content>
-          <v-list-item-title class="title">
-            Timetable
-          </v-list-item-title>
-          <v-list-item-subtitle>
-            Generate your timetable
-          </v-list-item-subtitle>
-        </v-list-item-content>
-      </v-list-item>
-
-      <v-divider></v-divider>
-       <div v-for="(link, i) in items" :key="i">
-
-        <v-list-item
-            v-if="!link.subLinks"
-            :to="link.to"
-            class="v-list-item"
-        >
-            <v-list-item-icon>
-                <v-icon>{{ link.icon }}</v-icon>
-            </v-list-item-icon>
-
-            <v-list-item-title v-text="link.title" />
+          <v-list-item-content>
+            <v-list-item-title class="title">
+              Timetable
+            </v-list-item-title>
+            <v-list-item-subtitle>
+              Generate your timetable
+            </v-list-item-subtitle>
+          </v-list-item-content>
         </v-list-item>
 
-        <v-list-group
-            v-else
-            :key="link.title"
-            no-action
-            :prepend-icon="link.icon"
-            :value="false"
-        >
-            <template v-slot:activator>
-              <v-list-item-title>{{ link.title }}</v-list-item-title>
-             </template>
+        <v-divider></v-divider>
+        <div v-for="(link, i) in items" :key="i">
 
-            <v-list-item
-                v-for="sublink in link.subLinks"
-                :to="sublink.to"
-                :key="sublink.title"
-            >
+          <!-- <div v-if="link.permission"> -->
+
+            <v-list-item v-if="!link.subLinks" :to="link.to" class="v-list-item">
+              <v-list-item-icon>
+                <v-icon>{{ link.icon }}</v-icon>
+              </v-list-item-icon>
+
+              <v-list-item-title v-text="link.title" />
+            </v-list-item>
+
+            <v-list-group v-else :key="link.title" no-action :prepend-icon="link.icon" :value="false">
+              <template v-slot:activator>
+                <v-list-item-title>{{ link.title }}</v-list-item-title>
+              </template>
+
+              <v-list-item v-for="sublink in link.subLinks" :to="sublink.to" :key="sublink.title">
                 <v-list-item-icon>
                   <v-icon>{{ sublink.icon }}</v-icon>
                 </v-list-item-icon>
                 <v-list-item-title>{{ sublink.title }}</v-list-item-title>
 
-            </v-list-item>
+              </v-list-item>
 
-        </v-list-group>
+            </v-list-group>
 
-    </div>
+          <!-- </div> -->
+
+        </div>
 
       </v-list>
 
@@ -123,7 +107,7 @@
       </v-btn>
       <v-spacer></v-spacer>
       <v-btn @click="signOut">
-        <v-icon >mdi-export</v-icon> 
+        <v-icon>mdi-export</v-icon>
         Logout
       </v-btn>
     </v-app-bar>
@@ -149,57 +133,68 @@
 </template>
 
 <script>
-const Cookie = process.client ? require('js-cookie') : undefined;
-export default {
-  data() {
-    return {
-      clipped: false,
-      drawer: true,
-      fixed: true,
-      items: [
-        {
-          icon: 'mdi-account',
-          title: 'Teachers',
-          to: '/teacher',
-        },
-        {
-          icon: 'mdi-book',
-          title: 'Courses',
-          to: '/course',
-        },
-        {
-          icon: 'mdi-face',
-          title: 'Students',
-          to: '/student',
-        },
-        {
-          icon: 'mdi-home-city',
-          title: 'Places',
-          to: '/place',
-        },
-        {
-          icon: 'mdi-timetable',
-          title: 'Timetable',
-          to: '/timetable',
-        },
-        {
-          icon: 'mdi-account-circle',
-          title: 'Users',
-          to: '/user',
-        },
-      ],
-      miniVariant: false,
-      right: true,
-      rightDrawer: false,
+  import {
+    mapState
+  } from 'vuex';
+  const Cookie = process.client ? require('js-cookie') : undefined;
+  export default {
+    computed: {
+      ...mapState(['auth']),
+    },
+    data() {
+      return {
+        clipped: false,
+        drawer: true,
+        fixed: true,
+        items: [{
+            icon: 'mdi-account',
+            title: 'Teachers',
+            to: '/teacher',
+          },
+          {
+            icon: 'mdi-book',
+            title: 'Courses',
+            to: '/course',
+          },
+          {
+            icon: 'mdi-face',
+            title: 'Students',
+            to: '/student',
+          },
+          {
+            icon: 'mdi-account-check',
+            title: 'Student Course',
+            to: '/studentCourse',
+          },
+          {
+            icon: 'mdi-home-city',
+            title: 'Places',
+            to: '/place',
+          },
+          {
+            icon: 'mdi-timetable',
+            title: 'Timetable',
+            to: '/timetable',
+          },
+          {
+            icon: 'mdi-account-circle',
+            title: 'Users',
+            to: '/user',
+          }
+          
+        ],
+        miniVariant: false,
+        right: true,
+        rightDrawer: false,
 
-    }
-  },
-  methods: {
-    signOut(){
-      this.$store.dispatch('logout');
-      this.$router.push('/login');
+      }
+    },
+    methods: {
+      signOut() {
+        this.$store.dispatch('logout');
+        this.$router.push('/login');
+      }
     }
   }
-}
-</script>
 
+</script>

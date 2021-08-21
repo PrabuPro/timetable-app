@@ -1,5 +1,5 @@
 <template>
-  <div class="category-table-section" style="width: 80%">
+  <div v-if="auth.accessToken != 'Admin'" class="category-table-section" style="width: 80%">
     <v-data-table
       :headers="headers"
       :items="teachers"
@@ -39,31 +39,31 @@
                       <v-col cols="12" sm="12" md="12">
                         <v-text-field
                           label="Teacher Name"
-                          v-model="$v.editedItem.name.$model"
+                          v-model="$v.editedItem.Name.$model"
                           :error-messages="teacherNameValidation"
                           required
-                          @input="$v.editedItem.name.$touch()"
-                          @blur="$v.editedItem.name.$touch()"
+                          @input="$v.editedItem.Name.$touch()"
+                          @blur="$v.editedItem.Name.$touch()"
                         ></v-text-field>
                       </v-col>
                       <v-col cols="12" sm="12" md="12">
                         <v-text-field
                           label="Teacher Address"
-                          v-model="$v.editedItem.address.$model"
+                          v-model="$v.editedItem.Address.$model"
                           :error-messages="teacherAddressValidation"
                           required
-                          @input="$v.editedItem.address.$touch()"
-                          @blur="$v.editedItem.address.$touch()"
+                          @input="$v.editedItem.Address.$touch()"
+                          @blur="$v.editedItem.Address.$touch()"
                         ></v-text-field>
                       </v-col>
                       <v-col cols="12" sm="12" md="12">
                         <v-text-field
                           label="Years of Experience"
-                          v-model="$v.editedItem.yearsOfExperience.$model"
+                          v-model="$v.editedItem.YearsOfExperience.$model"
                           :error-messages="teacherYearsOfExperience"
                           required
-                          @input="$v.editedItem.yearsOfExperience.$touch()"
-                          @blur="$v.editedItem.yearsOfExperience.$touch()"
+                          @input="$v.editedItem.YearsOfExperience.$touch()"
+                          @blur="$v.editedItem.YearsOfExperience.$touch()"
                         ></v-text-field>
                       </v-col>
                     </v-row>
@@ -118,25 +118,25 @@ export default {
     this.loading = false;
   },
   computed: {
-    ...mapState(['teachers' ]),
+    ...mapState(['teachers' , 'auth' ]),
 
     teacherNameValidation() {
       const errors = []
-      if (!this.$v.editedItem.name.$dirty) return errors
-      !this.$v.editedItem.name.required &&
-        errors.push('Teacher name is required.')
+      if (!this.$v.editedItem.Name.$dirty) return errors
+      !this.$v.editedItem.Name.required &&
+        errors.push('Teacher Name is required.')
       return errors
     },
     teacherAddressValidation() {
       const errors = []
-      if (!this.$v.editedItem.address.$dirty) return errors
-      !this.$v.editedItem.address.required && errors.push('Teacher address is required.')
+      if (!this.$v.editedItem.Address.$dirty) return errors
+      !this.$v.editedItem.Address.required && errors.push('Teacher Address is required.')
       return errors
     },
     teacherYearsOfExperience() {
       const errors = []
-      if (!this.$v.editedItem.yearsOfExperience.$dirty) return errors
-      !this.$v.editedItem.yearsOfExperience.required && errors.push('Years of experience is required.')
+      if (!this.$v.editedItem.YearsOfExperience.$dirty) return errors
+      !this.$v.editedItem.YearsOfExperience.required && errors.push('Years of experience is required.')
       return errors
     }
   },
@@ -146,31 +146,31 @@ export default {
       dialog: false,
       dialogDelete: false,
       headers: [
-        { text: 'Name', align: 'center', value: 'name' },
-        { text: 'Address', align: 'center', value: 'address' },
-        { text: 'Years of experience', align: 'center', value: 'yearsOfExperience' },
+        { text: 'Name', align: 'center', value: 'Name' },
+        { text: 'Address', align: 'center', value: 'Address' },
+        { text: 'Years of experience', align: 'center', value: 'YearsOfExperience' },
         { text: 'Actions', value: 'actions', align: 'center', sortable: false },
       ],
       editedIndex: -1,
       editedItem: {
-        id: '',
-        name: '',
-        address: '',
-        yearsOfExperience: '',
+        TeacherId: '',
+        Name: '',
+        Address: '',
+        YearsOfExperience: '',
       },
       defaultItem: {
-        id: '',
-        name: '',
-        address: '',
-        yearsOfExperience: '',
+        TeacherId: '',
+        Name: '',
+        Address: '',
+        YearsOfExperience: '',
       },
     }
   },
   validations: {
     editedItem: {
-      name: { required },
-      address: { required },
-      yearsOfExperience: { required },
+      Name: { required },
+      Address: { required },
+      YearsOfExperience: { required },
     },
   },
  
@@ -213,11 +213,11 @@ export default {
     getMainObject() {
       return {
         object: {
-          name : this.editedItem.name,
-          address: this.editedItem.address,
-          yearsOfExperience: this.editedItem.yearsOfExperience,
+          Name : this.editedItem.Name,
+          Address: this.editedItem.Address,
+          YearsOfExperience: this.editedItem.YearsOfExperience,
         },
-        id: this.editedItem.id,
+        id: this.editedItem.TeacherId,
         editIndex: this.editedIndex,
         urlPath: "/api/Teachers/",
         resetItem: "resetTeachers", 

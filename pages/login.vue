@@ -65,29 +65,29 @@ export default {
   methods: {
     async postLogin() {
       try {
-        // await this.$axios
-        //   .$post('/api/Users/LogInuser', {
-        //     username: this.email,
-        //     password: this.password,
-        //   })
-        //   .then((res) => {
-        //     console.log('res', res);
+        await this.$axios
+          .$post('/api/Login', {
+            Email: this.email,
+            Password: this.password,
+          })
+          .then((res) => {
+            console.log('res', res);
 
-        //     const data = res;
+            const data = res;
 
-        //       const auth = {
-        //         accessToken: data
-        //       }
-        //       this.$store.commit('setAuth', auth) // mutating to store for client rendering
-        //       Cookie.set('auth', auth) // saving token in cookie for server rendering
-        //       this.$router.push('/student');           
-        //   })
-        const auth = {
-                accessToken: "token123"
+              const auth = {
+                accessToken: data
               }
-        this.$store.commit('setAuth', auth)
-        Cookie.set('auth', auth) 
-        this.$router.push('/student'); 
+              this.$store.commit('setAuth', auth) // mutating to store for client rendering
+              Cookie.set('auth', auth) // saving token in cookie for server rendering
+              this.$router.push('/student');           
+          })
+        // const auth = {
+        //         accessToken: "token123"
+        //       }
+        // this.$store.commit('setAuth', auth)
+        // Cookie.set('auth', auth) 
+        // this.$router.push('/student'); 
       } catch (err) {}
 
     },

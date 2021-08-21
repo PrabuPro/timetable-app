@@ -39,11 +39,11 @@
                       <v-col cols="12" sm="12" md="12">
                         <v-text-field
                           label="Place"
-                          v-model="$v.editedItem.name.$model"
+                          v-model="$v.editedItem.Name.$model"
                           :error-messages="placeNameValidation"
                           required
-                          @input="$v.editedItem.name.$touch()"
-                          @blur="$v.editedItem.name.$touch()"
+                          @input="$v.editedItem.Name.$touch()"
+                          @blur="$v.editedItem.Name.$touch()"
                         ></v-text-field>
                       </v-col>
                     <v-col
@@ -54,20 +54,20 @@
 
                         <v-checkbox
                         label="AC"
-                        v-model="$v.editedItem.isAC.$model"
-                        @input="$v.editedItem.isAC.$touch()"
-                        @blur="$v.editedItem.isAC.$touch()"
+                        v-model="$v.editedItem.IsAC.$model"
+                        @input="$v.editedItem.IsAC.$touch()"
+                        @blur="$v.editedItem.IsAC.$touch()"
                         ></v-checkbox>
                         
                     </v-col>
                       <v-col cols="12" sm="12" md="12">
                         <v-text-field
                           label="Capacity"
-                          v-model="$v.editedItem.capacity.$model"
-                          :error-messages="capacityValidation"
+                          v-model="$v.editedItem.Capacity.$model"
+                          :error-messages="CapacityValidation"
                           required
-                          @input="$v.editedItem.capacity.$touch()"
-                          @blur="$v.editedItem.capacity.$touch()"
+                          @input="$v.editedItem.Capacity.$touch()"
+                          @blur="$v.editedItem.Capacity.$touch()"
                         ></v-text-field>
                       </v-col>
                     </v-row>
@@ -126,15 +126,15 @@ export default {
 
     placeNameValidation() {
       const errors = []
-      if (!this.$v.editedItem.name.$dirty) return errors
-      !this.$v.editedItem.name.required &&
-        errors.push('Place name is required.')
+      if (!this.$v.editedItem.Name.$dirty) return errors
+      !this.$v.editedItem.Name.required &&
+        errors.push('Place Name is required.')
       return errors
     },
-    capacityValidation() {
+    CapacityValidation() {
       const errors = []
-      if (!this.$v.editedItem.capacity.$dirty) return errors
-      !this.$v.editedItem.capacity.required && errors.push('Capacity is required.')
+      if (!this.$v.editedItem.Capacity.$dirty) return errors
+      !this.$v.editedItem.Capacity.required && errors.push('Capacity is required.')
       return errors
     }
   },
@@ -144,31 +144,31 @@ export default {
       dialog: false,
       dialogDelete: false,
       headers: [
-        { text: 'Name', align: 'center', value: 'name' },
-        { text: 'AC', align: 'center', value: 'isAC' },
-        { text: 'Capacity', align: 'center', value: 'capacity' },
+        { text: 'Name', align: 'center', value: 'Name' },
+        { text: 'AC', align: 'center', value: 'IsAC' },
+        { text: 'Capacity', align: 'center', value: 'Capacity' },
         { text: 'Actions', value: 'actions', align: 'center', sortable: false },
       ],
       editedIndex: -1,
       editedItem: {
-        id: '',
-        name: '',
-        isAC: '',
-        capacity: '',
+        PlaceId: '',
+        Name: '',
+        IsAC: '',
+        Capacity: '',
       },
       defaultItem: {
-        id: '',
-        name: '',
-        isAC: false,
-        capacity: '',
+        PlaceId: '',
+        Name: '',
+        IsAC: false,
+        Capacity: '',
       },
     }
   },
   validations: {
     editedItem: {
-      name: { required },
-      isAC: { required },
-      capacity: { required },
+      Name: { required },
+      IsAC: { required },
+      Capacity: { required },
     },
   },
  
@@ -211,11 +211,11 @@ export default {
     getMainObject() {
       return {
         object: {
-          name : this.editedItem.name,
-          isAC: this.editedItem.isAC,
-          capacity: this.editedItem.capacity,
+          Name : this.editedItem.Name,
+          IsAC: this.editedItem.IsAC,
+          Capacity: this.editedItem.Capacity,
         },
-        id: this.editedItem.id,
+        id: this.editedItem.PlaceId,
         editIndex: this.editedIndex,
         urlPath: "/api/Places/",
         resetItem: "resetPlaces", 
