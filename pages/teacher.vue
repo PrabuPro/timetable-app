@@ -1,5 +1,5 @@
 <template>
-  <div v-if="auth.accessToken != 'Admin'" class="category-table-section" style="width: 80%">
+  <div class="category-table-section" style="width: 80%">
     <v-data-table
       :headers="headers"
       :items="teachers"
@@ -13,7 +13,7 @@
           <v-toolbar-title>Teachers</v-toolbar-title>
           <v-divider class="mx-4" inset vertical></v-divider>
           <v-spacer></v-spacer>
-         
+
           <v-dialog v-model="dialog" max-width="500px">
             <template v-slot:activator="{ on, attrs }">
               <v-btn
@@ -114,11 +114,11 @@ import { required } from 'vuelidate/lib/validators'
 export default {
   middleware: 'authenticated',
   async created() {
-    await this.$store.dispatch('getItems', this.getMainObject());
-    this.loading = false;
+    await this.$store.dispatch('getItems', this.getMainObject())
+    this.loading = false
   },
   computed: {
-    ...mapState(['teachers' , 'auth' ]),
+    ...mapState(['teachers']),
 
     teacherNameValidation() {
       const errors = []
@@ -130,25 +130,31 @@ export default {
     teacherAddressValidation() {
       const errors = []
       if (!this.$v.editedItem.Address.$dirty) return errors
-      !this.$v.editedItem.Address.required && errors.push('Teacher Address is required.')
+      !this.$v.editedItem.Address.required &&
+        errors.push('Teacher Address is required.')
       return errors
     },
     teacherYearsOfExperience() {
       const errors = []
       if (!this.$v.editedItem.YearsOfExperience.$dirty) return errors
-      !this.$v.editedItem.YearsOfExperience.required && errors.push('Years of experience is required.')
+      !this.$v.editedItem.YearsOfExperience.required &&
+        errors.push('Years of experience is required.')
       return errors
-    }
+    },
   },
   data() {
     return {
-      loading:true,
+      loading: true,
       dialog: false,
       dialogDelete: false,
       headers: [
         { text: 'Name', align: 'center', value: 'Name' },
         { text: 'Address', align: 'center', value: 'Address' },
-        { text: 'Years of experience', align: 'center', value: 'YearsOfExperience' },
+        {
+          text: 'Years of experience',
+          align: 'center',
+          value: 'YearsOfExperience',
+        },
         { text: 'Actions', value: 'actions', align: 'center', sortable: false },
       ],
       editedIndex: -1,
@@ -173,7 +179,7 @@ export default {
       YearsOfExperience: { required },
     },
   },
- 
+
   methods: {
     newJob() {},
     editItem(item) {
@@ -213,27 +219,27 @@ export default {
     getMainObject() {
       return {
         object: {
-          Name : this.editedItem.Name,
+          Name: this.editedItem.Name,
           Address: this.editedItem.Address,
           YearsOfExperience: this.editedItem.YearsOfExperience,
         },
         id: this.editedItem.TeacherId,
         editIndex: this.editedIndex,
-        urlPath: "/api/Teachers/",
-        resetItem: "resetTeachers", 
-        setItem: "setTeachers",
-        addNewItem: "addNewTeacher",
-        updateItem: "updateTeacher",
-        deleteItem: "deleteTeacher",
+        urlPath: '/api/Teachers/',
+        resetItem: 'resetTeachers',
+        setItem: 'setTeachers',
+        addNewItem: 'addNewTeacher',
+        updateItem: 'updateTeacher',
+        deleteItem: 'deleteTeacher',
         messeges: {
-          addItem: "teacher Added",
-          updateItem: "teacher Updated",
-          deleteItem: "teacher Deleted"
-        }
+          addItem: 'teacher Added',
+          updateItem: 'teacher Updated',
+          deleteItem: 'teacher Deleted',
+        },
       }
     },
     save() {
-      console.log("save");
+      console.log('save')
       this.$v.$touch()
       if (!this.$v.$invalid) {
         if (this.editedIndex > -1) {

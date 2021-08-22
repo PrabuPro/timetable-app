@@ -5,6 +5,7 @@
         color="primary"
         dark
         class="mb-2"
+        v-if="auth.accessToken == 'Admin'"
         @click="generateTimetable()"
       >
         Generate Time Table
@@ -33,6 +34,10 @@
 import { mapState } from 'vuex'
   export default {
     middleware: 'authenticated',
+
+    computed: {
+      ...mapState(['auth']),
+    },
  
     data() {
       return {

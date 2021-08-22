@@ -35,11 +35,11 @@ export const mutations = {
     state.students.push(newStudent)
   },
   updateStudent(state, editStudent){
-    let editIndex = state.students.findIndex(item => item.id == editStudent.id)
+    let editIndex = state.students.findIndex(item => item.StudentId == editStudent.StudentId)
     Object.assign(state.students[editIndex], editStudent)
   },
   deleteStudent(state, studentId){
-    let editIndex = state.students.findIndex(item => item.id == studentId)
+    let editIndex = state.students.findIndex(item => item.StudentId == studentId)
     state.students.splice(editIndex, 1)
   },
 
@@ -54,11 +54,11 @@ export const mutations = {
     state.teachers.push(newTeacher)
   },
   updateTeacher(state, editTeacher){
-    let editIndex = state.teachers.findIndex(item => item.id == editTeacher.id)
+    let editIndex = state.teachers.findIndex(item => item.TeacherId == editTeacher.TeacherId)
     Object.assign(state.teachers[editIndex], editTeacher)
   },
   deleteTeacher(state, teacherId){
-    let editIndex = state.teachers.findIndex(item => item.id == teacherId)
+    let editIndex = state.teachers.findIndex(item => item.TeacherId == teacherId)
     state.teachers.splice(editIndex, 1)
   },
 
@@ -73,11 +73,11 @@ export const mutations = {
     state.courses.push(newCourse)
   },
   updateCourse(state, editCourse){
-    let editIndex = state.courses.findIndex(item => item.id == editCourse.id)
+    let editIndex = state.courses.findIndex(item => item.CourseId == editCourse.CourseId)
     Object.assign(state.courses[editIndex], editCourse)
   },
   deleteCourse(state, courseId){
-    let editIndex = state.courses.findIndex(item => item.id == courseId)
+    let editIndex = state.courses.findIndex(item => item.CourseId == courseId)
     state.courses.splice(editIndex, 1)
   },
 
@@ -93,11 +93,11 @@ export const mutations = {
     state.places.push(newPlace)
   },
   updatePlace(state, editPlace){
-    let editIndex = state.places.findIndex(item => item.id == editPlace.id)
+    let editIndex = state.places.findIndex(item => item.PlaceId == editPlace.PlaceId)
     Object.assign(state.places[editIndex], editPlace)
   },
   deletePlace(state, placeId){
-    let editIndex = state.places.findIndex(item => item.id == placeId)
+    let editIndex = state.places.findIndex(item => item.PlaceId == placeId)
     state.places.splice(editIndex, 1)
   },
 
@@ -132,7 +132,7 @@ export const mutations = {
     state.studentCourses.push(newStudentCourse)
   },
   updateStudentCourse(state, editStudentCourse){
-    let editIndex = state.studentCourses.findIndex(item => item.id == editStudentCourse.id)
+    let editIndex = state.studentCourses.findIndex(item => item.StudentCourseId == editStudentCourse.StudentCourseId)
     Object.assign(state.studentCourses[editIndex], editStudentCourse)
   },
   deleteStudentCourse(state, studentCourseId){

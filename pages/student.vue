@@ -59,7 +59,7 @@
                       <v-col cols="12" sm="12" md="12">
                         <v-text-field
                           label="DOB"
-                          placeholder="DD/MM/YYYY"
+                          placeholder="MM/DD/YYYY"
                           v-model="$v.editedItem.DateOfBirth.$model"
                           :error-messages="studentDateOfBirthValidation"
                           required

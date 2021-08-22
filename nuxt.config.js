@@ -71,7 +71,7 @@ export default {
   },
 
   axios: {
-    baseURL: 'http://192.168.1.101:45455', // Used as fallback if no runtime config is provided
+    baseURL: 'http://192.168.1.100:45455', // Used as fallback if no runtime config is provided
     // baseURL: 'http://localhost:2811', // Used as fallback if no runtime config is provided
     proxy: true
   },
@@ -79,7 +79,7 @@ export default {
   proxy: {
     "/api": {
       target:
-        "http://192.168.1.101:45455/api",
+        "http://192.168.1.100:45455/api",
         // "http://localhost:2811",
       pathRewrite: { "^/api": "" }
     }
