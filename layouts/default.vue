@@ -157,7 +157,7 @@
             to: '/course',
           },
           {
-            icon: 'mdi-face',
+            icon: 'mdi-face-man',
             title: 'Students',
             to: '/student',
           },
